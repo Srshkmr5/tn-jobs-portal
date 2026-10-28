@@ -1,0 +1,39 @@
+name: Daily TN Jobs Auto-Updater & Deployment
+
+on:
+  schedule:
+    # Runs daily at 00:30 UTC (6:00 AM IST)
+    - cron: '30 0 * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub UI anytime
+
+permissions:
+  contents: write
+
+jobs:
+  update-jobs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run Maintenance & Archive Expired Jobs
+        run: |
+          node portal/update-jobs.mjs --archive
+          node portal/update-jobs.mjs --stats
+
+      - name: Commit and Push Updates
+        run: |
+          git config user.name "TN-Jobs-Bot"
+          git config user.email "bot@srshkmr.co.in"
+          git add portal/data/jobs.json portal/data/archived-jobs.json
+          if git diff --staged --quiet; then
+            echo "No changes detected. Portal is up to date."
+          else
+            git commit -m "chore(portal): automated daily job freshness update [skip ci]"
+            git push
+          fi

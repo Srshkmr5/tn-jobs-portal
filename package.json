@@ -1,0 +1,23 @@
+{
+  "name": "tn-jobs-portal",
+  "version": "1.0.0",
+  "description": "Tamil Nadu Public Job & Opportunity Compass - Verified Government & Private Opportunities",
+  "main": "serve.mjs",
+  "type": "module",
+  "scripts": {
+    "start": "node serve.mjs",
+    "update-jobs": "node update-jobs.mjs",
+    "archive-expired": "node update-jobs.mjs --archive"
+  },
+  "keywords": [
+    "tamil-nadu",
+    "jobs",
+    "government-jobs",
+    "tnpsc",
+    "mrb",
+    "trb",
+    "employment"
+  ],
+  "author": "srshkmr",
+  "license": "MIT"
+}

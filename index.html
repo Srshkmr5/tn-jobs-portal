@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TN Career Compass — தமிழ்நாடு வேலைவாய்ப்பு தளம்</title>
+  <meta name="description" content="Free, verified public job listings, government notifications, and preparation guides for Tamil Nadu.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="top-bar">
+        <div class="brand">
+          <div class="brand-icon">🏛️</div>
+          <div>
+            <h1 class="brand-title">TN Career Compass</h1>
+            <div class="brand-subtitle">தமிழ்நாடு வேலைவாய்ப்பு & தேர்வு வழிகாட்டி • Verified Public Portal</div>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="action-header-btn btn-post-job" id="postJobBtn" title="List a job vacancy on this portal">
+            ➕ Post a Job
+          </button>
+          <button class="action-header-btn btn-advertise" id="advertiseBtn" title="Advertise your training institute or company">
+            📢 Advertise / Partner
+          </button>
+          <button class="saved-toggle-btn" id="savedToggleBtn" title="View jobs you starred">
+            ⭐ Saved Jobs <span class="star-count-badge" id="starCountBadge">0</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Counters -->
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number" id="totalVacanciesStat">0</span>
+          <span class="stat-label">Active Vacancies Across TN</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" id="govtJobsStat">0</span>
+          <span class="stat-label">Govt Notifications (TNPSC, MRB, TRB)</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" id="privateJobsStat">0</span>
+          <span class="stat-label">Private & Core Openings</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="main-content">
+    
+    <!-- Controls Box: Search, Sector, Location, Qualification & Sort -->
+    <section class="controls-card">
+      <!-- Search Input -->
+      <div class="search-bar-row">
+        <span class="search-icon">🔍</span>
+        <input 
+          type="text" 
+          id="searchInput" 
+          class="search-input" 
+          placeholder="Search by job title, department, exam or qualification (e.g. VAO, Police, 10th, B.E, Zoho)..."
+          autocomplete="off"
+        >
+      </div>
+
+      <!-- Sector Filter Pills -->
+      <div class="sector-pills">
+        <button class="pill-btn active" data-sector="all">All Opportunities</button>
+        <button class="pill-btn" data-sector="Government">🏛️ Tamil Nadu Govt</button>
+        <button class="pill-btn" data-sector="Private">🏢 Private Sector</button>
+        <button class="pill-btn" data-sector="Engineering">⚙️ Engineering & Core</button>
+        <button class="pill-btn" data-sector="Healthcare">🏥 Healthcare & Medical</button>
+        <button class="pill-btn" data-sector="Finance">🏦 Banking & Finance</button>
+      </div>
+
+      <!-- Dropdown Selectors Row -->
+      <div class="filter-selectors-row">
+        <div class="filter-group">
+          <!-- Location Filter -->
+          <select id="locationSelect" class="filter-select" aria-label="Filter by Location">
+            <option value="all">📍 All Locations (TN)</option>
+            <option value="chennai">Chennai Region</option>
+            <option value="coimbatore">Coimbatore Region</option>
+            <option value="madurai">Madurai Region</option>
+            <option value="statewide">Statewide / All Districts</option>
+          </select>
+
+          <!-- Qualification Filter -->
+          <select id="qualSelect" class="filter-select" aria-label="Filter by Qualification">
+            <option value="all">🎓 All Qualifications</option>
+            <option value="10th">10th / SSLC / ITI Pass</option>
+            <option value="Diploma">Diploma Holders</option>
+            <option value="Degree">Any Bachelor's Degree</option>
+            <option value="B.E / B.Tech">B.E / B.Tech Graduates</option>
+            <option value="Post Graduate">Post Graduate / NET / Ph.D</option>
+          </select>
+
+          <!-- Sort Select -->
+          <select id="sortSelect" class="filter-select" aria-label="Sort Jobs">
+            <option value="deadline">⏳ Deadline (Closing Soonest)</option>
+            <option value="newest">🆕 Recently Announced</option>
+            <option value="vacancies">👥 Most Vacancies</option>
+          </select>
+        </div>
+
+        <div class="results-summary" id="resultsSummary">
+          Loading active listings...
+        </div>
+      </div>
+    </section>
+
+    <!-- Jobs Listing Container -->
+    <section class="jobs-list" id="jobsContainer" aria-label="Active Job Listings">
+      <!-- Dynamic job cards rendered by app.js -->
+    </section>
+
+  </main>
+
+  <!-- CareerOps Preparation & Guidance Modal Drawer -->
+  <div class="modal-backdrop" id="prepModal" role="dialog" aria-modal="true">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-header-titles">
+          <h3 class="modal-title" id="modalJobTitle">Job Title</h3>
+          <div class="modal-org" id="modalJobOrg">Organization & Details</div>
+        </div>
+        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close Guide">&times;</button>
+      </div>
+
+      <div class="modal-body" id="modalContent">
+        <!-- Dynamic preparation guide rendered here -->
+      </div>
+
+      <div class="modal-footer">
+        <a href="#" id="modalPdfBtn" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          📄 Download Official Notification PDF
+        </a>
+        <a href="#" id="modalApplyBtn" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          🚀 Proceed to Official Application
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Post a Job Modal -->
+  <div class="modal-backdrop" id="postJobModal" role="dialog" aria-modal="true">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-header-titles">
+          <h3 class="modal-title">➕ List a Job Opening in Tamil Nadu</h3>
+          <div class="modal-org">Free public listing for employers, institutions & businesses</div>
+        </div>
+        <button class="modal-close-btn" id="postJobCloseBtn" aria-label="Close">&times;</button>
+      </div>
+
+      <form id="postJobForm" class="modal-body">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="jobTitle">Job Title / Designation *</label>
+            <input type="text" id="jobTitle" class="form-input" required placeholder="e.g. Quality Control Engineer, Accountant, Teacher">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="jobOrg">Company / Organization / School Name *</label>
+            <input type="text" id="jobOrg" class="form-input" required placeholder="e.g. Sri Krishna Textiles, ABC Hospital, Kovai Auto">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="jobSector">Industry / Sector *</label>
+            <select id="jobSector" class="form-input" required>
+              <option value="Private">🏢 Private Sector (General / Services)</option>
+              <option value="Private Tech">💻 Private Tech / IT / Software</option>
+              <option value="Manufacturing">🏭 Manufacturing / Core / Auto</option>
+              <option value="Healthcare">🏥 Healthcare & Hospitals</option>
+              <option value="Education">🎓 Schools / Colleges / Teaching</option>
+              <option value="Banking & Finance">🏦 Banking & Accounts</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="jobLocation">District / City in Tamil Nadu *</label>
+            <input type="text" id="jobLocation" class="form-input" required placeholder="e.g. Coimbatore, Chennai, Madurai, Salem">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="jobVacancies">Number of Vacancies *</label>
+            <input type="number" id="jobVacancies" class="form-input" required min="1" placeholder="e.g. 5">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="jobQual">Required Qualification *</label>
+            <input type="text" id="jobQual" class="form-input" required placeholder="e.g. 10th / 12th / Diploma / Any Degree / B.E">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="jobSalary">Salary Range / Monthly Pay</label>
+            <input type="text" id="jobSalary" class="form-input" placeholder="e.g. ₹18,000 - ₹25,000 / month">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="jobDeadline">Last Date to Apply *</label>
+            <input type="date" id="jobDeadline" class="form-input" required>
+          </div>
+          <div class="form-group full-width">
+            <label class="form-label" for="jobApply">Official Application Link or HR Contact (Email / Phone) *</label>
+            <input type="text" id="jobApply" class="form-input" required placeholder="https://company.com/apply OR hr@company.com / 9876543210">
+          </div>
+          <div class="form-group full-width">
+            <label class="form-label" for="jobDesc">Key Responsibilities & Skills</label>
+            <textarea id="jobDesc" class="form-textarea" rows="3" placeholder="Brief details about the role, shifts, timing, and experience required..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-footer">
+          <button type="button" class="btn btn-secondary" id="postJobCancelBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">🚀 Publish Opportunity</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Advertise / Partner Modal -->
+  <div class="modal-backdrop" id="advertiseModal" role="dialog" aria-modal="true">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-header-titles">
+          <h3 class="modal-title">📢 Partner & High-Value Advertising</h3>
+          <div class="modal-org">Reach thousands of motivated job seekers, students & graduates across Tamil Nadu</div>
+        </div>
+        <button class="modal-close-btn" id="advertiseCloseBtn" aria-label="Close">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <p class="prep-section-text">
+          Our platform is visited daily by active job seekers across Tamil Nadu looking for government, core, medical, and private opportunities. We offer authentic, high-value sponsorship packages that help candidates while giving your brand premium visibility:
+        </p>
+
+        <div class="ad-card-grid">
+          <div class="ad-card">
+            <div class="ad-card-icon">⚡</div>
+            <h4 class="ad-card-title">Featured Employer Spotlight</h4>
+            <p class="ad-card-desc">Pin your urgent job openings to the top of all search results with a highlighted badge and direct one-click WhatsApp/application redirect.</p>
+            <span class="ad-card-tag">For Direct Employers & MSMEs</span>
+          </div>
+
+          <div class="ad-card">
+            <div class="ad-card-icon">🎓</div>
+            <h4 class="ad-card-title">Coaching & Training Academy Partner</h4>
+            <p class="ad-card-desc">Feature your institute as an official "Recommended Preparation Partner" inside the TNPSC, Police, Banking, or Coding exam guides.</p>
+            <span class="ad-card-tag">For TNPSC / IT / Skill Centers</span>
+          </div>
+
+          <div class="ad-card">
+            <div class="ad-card-icon">📜</div>
+            <h4 class="ad-card-title">Higher Education & Distance Degrees</h4>
+            <p class="ad-card-desc">Promote B.Tech, MBA, MCA, and Diploma distance education programs to candidates searching for degree-level eligibility.</p>
+            <span class="ad-card-tag">For Colleges & Universities</span>
+          </div>
+
+          <div class="ad-card">
+            <div class="ad-card-icon">💼</div>
+            <h4 class="ad-card-title">Skill Certification & Mock Interviews</h4>
+            <p class="ad-card-desc">Offer resume review, spoken English courses, or mock technical interviews to boost candidate placement rates.</p>
+            <span class="ad-card-tag">For EdTech & Career Coaches</span>
+          </div>
+        </div>
+
+        <div class="callout-box careerops-tip">
+          <div class="callout-title">
+            <span>🤝 Get in Touch to Partner With Us</span>
+          </div>
+          <p class="prep-section-text">
+            We maintain strict quality guidelines: no multi-level marketing, no fake consultancy fees, only 100% verified educational and employment opportunities.
+          </p>
+          <div style="margin-top: 0.75rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <a href="https://api.whatsapp.com/send?phone=919876543210&text=Hi,%20I%20am%20interested%20in%20advertising/partnering%20with%20TN%20Career%20Compass" target="_blank" class="btn btn-share">
+              💬 Chat on WhatsApp to Partner
+            </a>
+            <a href="mailto:contact@srshkmr.co.in?subject=Partnership%20Inquiry%20-%20TN%20Career%20Compass" class="btn btn-secondary">
+              ✉️ Email: contact@srshkmr.co.in
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
