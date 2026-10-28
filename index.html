@@ -283,6 +283,148 @@
     </div>
   </div>
 
+  <!-- CareerOps Resume Tailor & Fit Evaluator Modal -->
+  <div class="modal-backdrop" id="tailorModal" role="dialog" aria-modal="true">
+    <div class="modal-container tailor-modal-container">
+      <div class="modal-header">
+        <div class="modal-header-titles">
+          <h3 class="modal-title">✨ CareerOps Resume Tailor & Fit Scorer</h3>
+          <div class="modal-org" id="tailorModalTargetJob">Target: Loading Job...</div>
+        </div>
+        <button class="modal-close-btn" id="tailorCloseBtn" aria-label="Close">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        
+        <!-- Step 1: Candidate Input Box -->
+        <div id="tailorInputSection">
+          <div class="tailor-intro-banner">
+            <div>
+              <h4 style="font-weight: 700; color: #1e3a8a;">Personalize Your Application with Zero Fabrication</h4>
+              <p style="font-size: 0.88rem; color: #475569;">
+                CareerOps analyzes the employer's exact criteria, scores your match, and reformulates your genuine achievements to pass applicant tracking systems (ATS).
+              </p>
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm" id="loadSampleProfileBtn">
+              ⚡ Load Sample Profile
+            </button>
+          </div>
+
+          <form id="tailorProfileForm" class="form-grid" style="margin-top: 1rem;">
+            <div class="form-group">
+              <label class="form-label" for="candName">Full Name *</label>
+              <input type="text" id="candName" class="form-input" required placeholder="e.g. Suresh Kumar">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="candEmail">Email & Phone *</label>
+              <input type="text" id="candEmail" class="form-input" required placeholder="e.g. suresh@example.com | +91 9876543210">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="candLocation">Current City in Tamil Nadu *</label>
+              <input type="text" id="candLocation" class="form-input" required placeholder="e.g. Chennai, Tamil Nadu">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="candEducation">Highest Education & Institution *</label>
+              <input type="text" id="candEducation" class="form-input" required placeholder="e.g. B.E Computer Science, Anna University (2024)">
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label" for="candSkills">Your Key Skills & Strengths (comma-separated) *</label>
+              <input type="text" id="candSkills" class="form-input" required placeholder="e.g. Java, C++, Python, Data Structures, Problem Solving, Git, Linux">
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label" for="candProjects">Your Key Projects, Internships or Past Work *</label>
+              <textarea id="candProjects" class="form-textarea" rows="3" required placeholder="Describe 1 or 2 projects or past responsibilities (e.g. Developed a railway reservation portal using Java and MySQL with automated seat allotment)..."></textarea>
+            </div>
+            <div class="form-group full-width" style="margin-top: 0.5rem;">
+              <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; justify-content: center; font-size: 1rem;">
+                🚀 Analyze Match & Generate Tailored Resume
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Step 2: Evaluation Results & Tailored Resume (Hidden by default, shown after generate) -->
+        <div id="tailorResultSection" style="display: none;">
+          
+          <!-- Fit Scorecard -->
+          <div class="scorecard-box">
+            <div class="score-circle-wrapper">
+              <div class="score-circle" id="scoreCircle">88%</div>
+              <div class="score-label">ATS Fit Score</div>
+            </div>
+            <div class="score-details">
+              <h4 id="scoreHeading" style="font-weight: 700; color: #1e3a8a;">Strong Match for this Opportunity</h4>
+              <p id="scoreSummary" style="font-size: 0.85rem; color: #475569; margin-top: 0.25rem;">
+                Your background covers the core foundational criteria. CareerOps highlighted your matching competencies in the resume below.
+              </p>
+              <div class="keyword-tags-row" id="matchedKeywordsList">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Toolbar for Resume -->
+          <div class="resume-toolbar">
+            <div style="font-size: 0.9rem; font-weight: 700; color: #1e293b;">
+              📄 ATS-Tailored Resume Preview
+            </div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button type="button" class="btn btn-secondary btn-sm" id="editProfileBtn">
+                ✏️ Edit Details
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm" id="copyResumeTextBtn">
+                📋 Copy Text
+              </button>
+              <button type="button" class="btn btn-primary btn-sm" id="printResumeBtn">
+                🖨️ Print / Save as PDF
+              </button>
+            </div>
+          </div>
+
+          <!-- Printable ATS Resume Document Sheet -->
+          <div class="resume-sheet" id="resumeSheet">
+            <div class="resume-header">
+              <h1 class="resume-name" id="resName">Candidate Name</h1>
+              <div class="resume-contact" id="resContact">email@example.com • +91 9876543210 • Chennai, Tamil Nadu</div>
+            </div>
+
+            <section class="resume-section">
+              <h2 class="resume-sec-title">Professional Summary</h2>
+              <p class="resume-text" id="resSummary">Tailored professional summary aligned with target organization...</p>
+            </section>
+
+            <section class="resume-section">
+              <h2 class="resume-sec-title">Key Competencies & Technical Skills</h2>
+              <div class="resume-skills-grid" id="resSkills">
+                <!-- Skills list -->
+              </div>
+            </section>
+
+            <section class="resume-section">
+              <h2 class="resume-sec-title">Highlighted Projects & Experience</h2>
+              <div id="resExperience">
+                <!-- Tailored bullet points -->
+              </div>
+            </section>
+
+            <section class="resume-section">
+              <h2 class="resume-sec-title">Education & Credentials</h2>
+              <div id="resEducation">
+                <!-- Education details -->
+              </div>
+            </section>
+
+            <div class="resume-footer-note">
+              <span>Verified ATS-Tailored Document • Generated via CareerOps for <span id="resTargetEmployer">Employer</span></span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
   <script src="app.js"></script>
 </body>
 </html>

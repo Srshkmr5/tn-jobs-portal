@@ -876,3 +876,245 @@ body {
     grid-column: span 1;
   }
 }
+
+/* CareerOps Resume Tailor Button */
+.btn-tailor {
+  background: linear-gradient(135deg, #7c3aed 0%, #6366f1 100%);
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 2px 4px rgba(124, 58, 237, 0.2);
+}
+
+.btn-tailor:hover {
+  background: linear-gradient(135deg, #6d28d9 0%, #4f46e5 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(124, 58, 237, 0.3);
+}
+
+.btn-sm {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+}
+
+.btn-lg {
+  padding: 0.75rem 1.5rem;
+}
+
+/* Tailor Modal Specifics */
+.tailor-modal-container {
+  max-width: 860px;
+}
+
+.tailor-intro-banner {
+  background: #f1f5f9;
+  border-left: 4px solid var(--primary-light);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1.1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* Fit Scorecard */
+.scorecard-box {
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.score-circle-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 90px;
+}
+
+.score-circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #10b981;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 800;
+  box-shadow: 0 4px 6px rgba(16, 185, 129, 0.25);
+}
+
+.score-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-top: 0.35rem;
+}
+
+.score-details {
+  flex: 1;
+}
+
+.keyword-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+}
+
+.kw-tag {
+  background: #e2e8f0;
+  color: #1e293b;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.kw-tag.matched {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.kw-tag.highlight {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* Resume Toolbar */
+.resume-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
+}
+
+/* Printable ATS Resume Sheet */
+.resume-sheet {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-bottom-left-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+  padding: 2.25rem 2rem;
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  color: #111827;
+  line-height: 1.5;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.resume-header {
+  border-bottom: 2px solid #0f172a;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+.resume-name {
+  font-size: 1.75rem;
+  font-weight: bold;
+  letter-spacing: -0.01em;
+  color: #0f172a;
+  margin-bottom: 0.2rem;
+  font-family: var(--font-sans);
+}
+
+.resume-contact {
+  font-size: 0.85rem;
+  color: #475569;
+  font-family: var(--font-sans);
+}
+
+.resume-section {
+  margin-bottom: 1.25rem;
+}
+
+.resume-sec-title {
+  font-size: 0.95rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #0f172a;
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-sans);
+}
+
+.resume-text {
+  font-size: 0.9rem;
+  color: #1f2937;
+  line-height: 1.55;
+}
+
+.resume-skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.resume-skill-item {
+  font-size: 0.88rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-weight: 500;
+}
+
+.resume-bullet-list {
+  padding-left: 1.25rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #1f2937;
+}
+
+.resume-bullet-list li {
+  margin-bottom: 0.35rem;
+}
+
+.resume-footer-note {
+  margin-top: 1.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed #e2e8f0;
+  text-align: center;
+  font-size: 0.72rem;
+  color: #94a3b8;
+  font-family: var(--font-sans);
+}
+
+/* Print Rules - Generates Clean A4 PDF */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #resumeSheet, #resumeSheet * {
+    visibility: visible;
+  }
+  #resumeSheet {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 20mm;
+    border: none;
+    box-shadow: none;
+  }
+}
